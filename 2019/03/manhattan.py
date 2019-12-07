@@ -61,9 +61,11 @@ def getCoordinates(instuctions):
 
 
 def findIntersections(l1, l2):
+  set1 = set(l1)
+  set2 = set(l2)
   res = list()
-  for cord in l1:
-    if cord in l2:
+  for cord in set1:
+    if cord in set2:
       res.append(cord)
   return res
 
