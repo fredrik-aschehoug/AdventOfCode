@@ -4,7 +4,6 @@ from common import loadFile, fileToList, calculateFuel
 def main():
   inputHandle = loadFile("01/input.txt")
   massList = fileToList(inputHandle, "\n")
-  fuelList = list()
 
   totalFuel = sum([calculateFuel(mass) for mass in massList])
   
