@@ -1,3 +1,4 @@
+from common import listToString
 
 
 def op1(arg1, arg2, resPos, arr, mode1, mode2):
@@ -47,16 +48,15 @@ def parseInstruction(instruction):
     if instructionLenght == 1:
         parsed["opCode"] = int(instruction)
         return parsed
+    
+    opCode = listToString(instructionList[-2:])
+    parsed["opCode"] = int(opCode)
 
-    parsed["opCode"] = int(instructionList[-1])
     # Remove last two digits and reverse
     modes = instructionList[:-2][::-1]
 
-    print(instructionList[:-2])
-    print(modes)
-    print("---------")
     for i, mode in enumerate(modes):
-        parsed["m{}".format(i)] = mode
+        parsed["m{}".format(i + 1)] = mode
 
     return parsed
 
@@ -70,8 +70,6 @@ def run(inputValue, data):
         if instruction["opCode"] == 99:
             break
         if instruction["opCode"] == 1:
-            print("m1: {}, m2: {}".format(
-                instruction["m1"], instruction["m2"]))
             op1(program[pos + 1], program[pos + 2],
                 program[pos + 3], program, instruction["m1"], instruction["m2"])
             posIncrement = 4

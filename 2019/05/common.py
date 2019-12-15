@@ -11,7 +11,11 @@ def loadFile(fileName):
     else:
         return None
 
+
 def fileToList(fh, delimiter):
     content = fh.read()
     contentList = content.split(delimiter)
     return list(map(int, contentList))
+
+def listToString(l):
+    return ''.join(map(str, l))
