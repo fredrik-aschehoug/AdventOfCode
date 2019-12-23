@@ -3,7 +3,7 @@ from common import listToString
 
 def op1(arg1, arg2, resPos, arr, mode1, mode2):
     # Add
-    if mode1 and mode2:
+    if mode1 and mode2 :
         arr[resPos] = arg1 + arg2
     elif mode1:
         arr[resPos] = arg1 + arr[arg2]
@@ -30,9 +30,12 @@ def op3(val, pos, arr):
     arr[pos] = val
 
 
-def op4(pos, arr):
+def op4(pos, arr, immediateMode):
     # Output value in position
-    print(arr[pos])
+    if immediateMode:
+        print(pos)
+    else:
+        print(arr[pos])
 
 
 def parseInstruction(instruction):
@@ -56,7 +59,7 @@ def parseInstruction(instruction):
     modes = instructionList[:-2][::-1]
 
     for i, mode in enumerate(modes):
-        parsed["m{}".format(i + 1)] = mode
+        parsed["m{}".format(i + 1)] = int(mode)
 
     return parsed
 
@@ -81,7 +84,7 @@ def run(inputValue, data):
             op3(inputValue, program[pos + 1], program)
             posIncrement = 2
         elif instruction["opCode"] == 4:
-            op4(program[pos + 1], program)
+            op4(program[pos + 1], program, instruction["m1"])
             posIncrement = 2
         else:
             print("error, unknown operation")
