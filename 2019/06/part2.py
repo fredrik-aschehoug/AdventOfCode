@@ -8,20 +8,14 @@ def main():
 
     orbits = [x.split(")") for x in inputList]
 
-    g = nx.DiGraph()
+    g = nx.Graph()
 
     for a, b in orbits:
         g.add_edge(b, a)
 
-    paths = nx.shortest_path(g)
+    path = nx.shortest_path_length(g, source="H4S", target="NRN")
 
-    l1 = list()
-    for item in paths.values():
-        for x in item.values():
-            if len(x) > 1:
-                l1.append(x)
-
-    print(len(l1))
+    print(path)
 
 
 if __name__ == "__main__":
