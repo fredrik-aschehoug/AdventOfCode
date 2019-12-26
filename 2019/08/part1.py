@@ -1,5 +1,5 @@
-from common import loadFile, fileToIntList, chunks
-from itertools import permutations
+from common import loadFile, chunks
+
 
 def main():
     inputHandle = loadFile("08/input.txt")
@@ -23,16 +23,13 @@ def main():
         if zeroCount < leastZeros:
             leastZeros = zeroCount
             leastZerosIndex = lIndex
-    
+
     ones = 0
     twos = 0
     for line in layerChunks[leastZerosIndex]:
         ones += line.count(1)
         twos += line.count(2)
     print(ones * twos)
-
-
-
 
 
 if __name__ == "__main__":
