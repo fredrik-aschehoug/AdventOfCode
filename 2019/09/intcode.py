@@ -1,5 +1,6 @@
 from common import listToString
 
+
 def checkMem(arr, args):
     for arg in args:
         if arr.get(arg) is None:
@@ -25,7 +26,7 @@ def getResPos(arg, mode, relBase):
 
 
 def getArgs(arg1, arg2, arr, mode1, mode2, relBase):
-    checkMem(arr,[arg1, relBase + arg1, arg2, relBase + arg2] )
+    checkMem(arr, [arg1, relBase + arg1, arg2, relBase + arg2])
     res = {
         "res1": {
             0: arr[arg1],
@@ -53,7 +54,7 @@ def op2(arg1, arg2, arg3, arr, mode1, mode2, mode3, relBase):
     param1, param2 = getArgs(arg1, arg2, arr, mode1, mode2, relBase)
     resPos = getResPos(arg3, mode3, relBase)
     arr[resPos] = param1 * param2
-    
+
 
 def op3(val, pos, arr, mode, relBase):
     """Write input to position"""
@@ -84,6 +85,7 @@ def op6(arg1, arg2, arr, mode1, mode2, relBase):
         return param2
     return None
 
+
 def op7(arg1, arg2, arg3, arr, mode1, mode2, mode3, relBase):
     """Less than"""
     param1, param2 = getArgs(arg1, arg2, arr, mode1, mode2, relBase)
@@ -108,7 +110,6 @@ def op9(arg, mode, relBase, arr):
     """Adjust relative base"""
     param = getArg(arg, mode, relBase, arr)
     return relBase + param
-
 
 
 def parseInstruction(instruction):
@@ -155,7 +156,8 @@ def run(inputValue, data):
                 program[pos + 3], program, instruction["m1"], instruction["m2"], instruction["m3"], relPos)
             posIncrement = 4
         elif instruction["opCode"] == 3:
-            op3(inputValue, program[pos + 1], program, instruction["m1"], relPos)
+            op3(inputValue, program[pos + 1],
+                program, instruction["m1"], relPos)
             posIncrement = 2
         elif instruction["opCode"] == 4:
             op4(program[pos + 1], program, instruction["m1"], relPos)
@@ -163,11 +165,13 @@ def run(inputValue, data):
         elif instruction["opCode"] == 5:
             newPos = op5(program[pos + 1], program[pos + 2],
                          program, instruction["m1"], instruction["m2"], relPos)
-            if newPos is None: posIncrement = 3
+            if newPos is None:
+                posIncrement = 3
         elif instruction["opCode"] == 6:
             newPos = op6(program[pos + 1], program[pos + 2],
                          program, instruction["m1"], instruction["m2"], relPos)
-            if newPos is None: posIncrement = 3
+            if newPos is None:
+                posIncrement = 3
         elif instruction["opCode"] == 7:
             op7(program[pos + 1], program[pos + 2],
                 program[pos + 3], program, instruction["m1"], instruction["m2"], instruction["m3"], relPos)
