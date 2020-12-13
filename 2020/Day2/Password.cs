@@ -1,34 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 
 namespace Day2
 {
-    class Password
+    class Password : IPassword
     {
-        public char letter;
-        public int min;
-        public int max;
-        public string password;
+        char letter;
+        int min;
+        int max;
+        string password;
 
-        public Password(string password)
+        public string Input { get; set; }
+
+        public Password()
         {
-            string[] slice1 = password.Split("-");
+        }
+        void Setup()
+        {
+            string[] slice1 = Input.Split("-");
             string[] slice2 = slice1.Last().Split(" ", 2);
             string[] slice3 = slice2.Last().Split(": ", 2);
 
-            this.min = int.Parse(slice1.First());
-            this.max = int.Parse(slice2.First());
-            this.letter = char.Parse(slice3.First());
-            this.password = slice3.Last();
+            min = int.Parse(slice1.First());
+            max = int.Parse(slice2.First());
+            letter = char.Parse(slice3.First());
+            password = slice3.Last();
         }
-
-        public bool isValid()
+        public bool IsValid()
         {
+            Setup();
             bool validPassword = false;
             int count = password.Count(c => c == letter);
-            if(count >= min & count <= max)
+            if (count >= min & count <= max)
             {
                 validPassword = true;
             }

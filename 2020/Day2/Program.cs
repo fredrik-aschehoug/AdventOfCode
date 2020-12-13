@@ -14,20 +14,21 @@ namespace Day2
                 .ToArray();
             return lines;
         }
-        static void Part1()
+        static void Solve<T>() where T: IPassword, new()
         {
             var lines = GetInput();
-            List<Password> passwordList = new List<Password>();
+            List<T> passwordList = new List<T>();
             foreach(string line in lines)
             {
-                passwordList.Add(new Password(line));
+                passwordList.Add(new T { Input = line });
             }
-            var validPasswords = passwordList.Where(password => password.isValid());
+            var validPasswords = passwordList.Where(password => password.IsValid());
             Console.WriteLine(validPasswords.Count());
         }
         static void Main(string[] args)
         {
-            Part1();
+            Solve<Password>();
+            Solve<Password2>();
         }
     }
 }
