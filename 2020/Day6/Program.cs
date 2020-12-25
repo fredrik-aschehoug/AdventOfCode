@@ -8,6 +8,7 @@ namespace Day6
         {
             Solver solver = new Solver();
             solver.Part1();
+            solver.Part2();
         }
     }
 }
