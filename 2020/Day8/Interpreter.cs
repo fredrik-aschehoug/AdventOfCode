@@ -7,16 +7,16 @@ namespace Day8
     class Interpreter
     {
         private List<(string, int)> _instructions;
-        private int accumulator = 0;
         private List<int> visited = new List<int>();
+        public int accumulator = 0;
         public Interpreter(List<(string, int)> instructions)
         {
             _instructions = instructions;
         }
-        public int Run()
+        public bool Run()
         {
             int currentIndex = 0;
-            while (true)
+            while (currentIndex < _instructions.Count)
             {
                 var instruction = _instructions[currentIndex];
                 int accumulatorIncrement = 0;
@@ -37,13 +37,14 @@ namespace Day8
                 int newIndex = currentIndex + indexIncerment;
                 if (visited.Contains(newIndex))
                 {
-                    return accumulator;
+                    return false;
 
                 }
                 visited.Add(currentIndex);
                 currentIndex = newIndex;
                 accumulator += accumulatorIncrement;
             }
+            return true;
         }
     }
 }
