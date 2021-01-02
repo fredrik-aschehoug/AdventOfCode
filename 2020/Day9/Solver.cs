@@ -36,15 +36,30 @@ namespace Day9
                 {
                     Console.WriteLine("XMAS stopped at index: {0}", currentIndex);
                     Console.WriteLine("The value is: {0}", numbers[currentIndex]);
+                    Part2(numbers[currentIndex]);
                     break;
                 }
                 currentIndex++;
             }
-            Console.WriteLine("Part 1 Done");
         }
-        public void Part2()
+        public void Part2(long target)
         {
-            Console.WriteLine("Part 2: {0}", 0);
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                long currentResult = 0;
+                int counter = 1;
+                while (currentResult < target &&  i + counter < numbers.Count)
+                {
+                    var range = numbers.GetRange(i, counter);
+                    currentResult = range.Sum();
+                    if (currentResult == target)
+                    {
+                        Console.WriteLine("Part 2: {0}", range.Min() + range.Max());
+                        return;
+                    }
+                    counter++;
+                }
+            }
         }
     }
 }
