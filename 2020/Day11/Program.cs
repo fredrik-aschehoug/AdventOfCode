@@ -6,7 +6,9 @@ namespace Day11
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Solver solver = new Solver();
+            solver.Part1();
+            solver.Part2();
         }
     }
 }
