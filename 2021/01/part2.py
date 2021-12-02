@@ -1,9 +1,9 @@
-from utils import loadFile, fileToList
+from utils import fileToList
 
 
 def main():
-    inputHandle = loadFile("01/input.txt")
-    measurements = fileToList(inputHandle, "\n")
+    with open("01/input.txt", encoding="UTF-8") as file:
+        measurements = fileToList(file, "\n")
     previousMeasurement = sum(measurements[0:3])
     counter = 0
 
