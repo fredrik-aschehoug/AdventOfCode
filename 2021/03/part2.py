@@ -22,28 +22,16 @@ def get_c02_bit(arr):
     return bit
 
 
-def get_oxygen(report, index):
+def get_rating(report, index, get_bit_callback):
     num_rows, num_cols = report.shape
     if (num_rows == 1):
         return report
 
-    bit = get_oxygen_bit(report[0:, index])
+    bit = get_bit_callback(report[0:, index])
 
     filter = np.asarray([bit])
     mask = np.in1d(report[:, index], filter)
-    return get_oxygen(report[mask], index + 1)
-
-
-def get_c02(report, index):
-    num_rows, num_cols = report.shape
-    if (num_rows == 1):
-        return report
-
-    bit = get_c02_bit(report[0:, index])
-
-    filter = np.asarray([bit])
-    mask = np.in1d(report[:, index], filter)
-    return get_c02(report[mask], index + 1)
+    return get_rating(report[mask], index + 1, get_bit_callback)
 
 
 def main():
@@ -53,8 +41,8 @@ def main():
     bits = [int(bit) for bit in list(content.replace("\n", ""))]
     report = np.array(bits).reshape(-1, numberOfBits)
 
-    oxygenBits = get_oxygen(report, 0)
-    co2Bits = get_c02(report, 0)
+    oxygenBits = get_rating(report, 0, get_oxygen_bit)
+    co2Bits = get_rating(report, 0, get_c02_bit)
     oxygen = bit_array_to_decimal(oxygenBits[0])
     c02 = bit_array_to_decimal(co2Bits[0])
 
