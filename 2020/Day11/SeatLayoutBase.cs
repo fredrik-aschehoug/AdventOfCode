@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 
 namespace Day11
 {
@@ -47,7 +44,8 @@ namespace Day11
             }
             return true;
         }
-        public  int CountOccupied()
+
+        public int CountOccupied()
         {
             return SeatMap.Cast<char>()
                 .Where(seat => seat == '#')

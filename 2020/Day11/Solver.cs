@@ -30,21 +30,48 @@ namespace Day11
         }
         public void Part1()
         {
-            var seatLayout = new SeatLayout1() { SeatMap = seatMap };
-            while(true)
+            Solve<SeatLayout1>("1");
+        }
+
+        public void Part2()
+        {
+            Solve<SeatLayout2>("2");
+
+        }
+
+        private void Solve<TLayout>(string part, bool debug = false) where TLayout : SeatLayoutBase, new()
+        {
+            var seatLayout = new TLayout() { SeatMap = seatMap };
+            while (true)
             {
                 var newLayout = seatLayout.Iterate();
-                if (seatLayout.Equals(new SeatLayout1() { SeatMap = newLayout }))
+                if (debug)
+                {
+                    PrintLayout(newLayout);
+                }
+                if (seatLayout.Equals(new TLayout() { SeatMap = newLayout }))
                 {
                     seatLayout.SeatMap = newLayout;
-                    Console.WriteLine("Part 1: {0}", seatLayout.CountOccupied());
+                    Console.WriteLine("Part {0}: {1}", part, seatLayout.CountOccupied());
                     break;
                 }
                 seatLayout.SeatMap = newLayout;
             }
         }
-        public void Part2()
+
+        private void PrintLayout(char[,] map)
         {
+            foreach (var i in Enumerable.Range(0, map.GetLength(0)))
+            {
+                var row = Enumerable.Range(0, map.GetLength(1))
+                .Select(x => map[i, x])
+                .ToArray();
+
+                Console.WriteLine(string.Join("", row));
+            }
+
+            Console.WriteLine("\n\n");
+
         }
     }
 }
