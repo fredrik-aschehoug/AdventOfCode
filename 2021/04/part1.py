@@ -1,24 +1,4 @@
-import numpy.ma as ma
-
-
-def get_boards(raw_boards):
-    columns = len(raw_boards[0].split("\n")[0].split())
-    boards = list()
-
-    for raw_board in raw_boards:
-        numbers = [int(n) for n in raw_board.replace("\n", " ").split()]
-        board = ma.array(numbers, dtype="i").reshape(-1, columns)
-        boards.append(board)
-
-    return boards
-
-
-def mark_boards(boards, number):
-    updated_boards = list()
-    for board in boards:
-        updatedBoard = ma.masked_values(board, number)
-        updated_boards.append(updatedBoard)
-    return updated_boards
+from utils import get_boards, mark_boards, get_score
 
 
 def check_winner(boards):
@@ -30,11 +10,6 @@ def check_winner(boards):
 
         if (column_sum.any() or row_sum.any()):
             return board
-
-
-def get_score(winner, number):
-    sum = winner.sum()
-    return sum * number
 
 
 def main():
@@ -51,8 +26,6 @@ def main():
             score = get_score(winner, number)
             print(score)
             break
-
-    print()
 
 
 if __name__ == "__main__":
