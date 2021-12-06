@@ -2,17 +2,17 @@ import numpy as np
 
 
 def calculate_school_size(input_text, days):
-    bincount = np.bincount([int(x) for x in input_text.split(",")])
+    initial_count = np.bincount([int(x) for x in input_text.split(",")])
     school = {i: 0 for i in range(10)}
-    for number, count in enumerate(bincount):
+    for number, count in enumerate(initial_count):
         school[number] = count
 
     for day in range(days):
         spawners = school[0]
         for i in range(max(school)):
-            school[i] = school.get(i + 1, 0)
-        school[6] = school.get(6, 0) + spawners
-        school[8] = school.get(8, 0) + spawners
+            school[i] = school[i + 1]
+        school[6] += spawners
+        school[8] = spawners
 
     count = sum(school.values())
     return count
