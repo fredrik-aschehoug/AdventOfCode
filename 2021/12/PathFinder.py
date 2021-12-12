@@ -9,12 +9,6 @@ class PathFinder:
     def is_small_cave(name):
         return name.islower()
 
-    def is_valid_next_step(self, path, node):
-        if (self.is_small_cave(node)):
-            if (node in path):
-                return False
-        return True
-
     def add_move(self, path, node):
         new_path = deepcopy(path)
         new_path.append(node)
@@ -46,3 +40,23 @@ class PathFinder:
             new_paths = self.get_paths(neighbors, path)
             frontier.extend(new_paths)
         return paths
+
+
+class PathFinder1(PathFinder):
+    def is_valid_next_step(self, path, node):
+        if (self.is_small_cave(node)):
+            if (node in path):
+                return False
+        return True
+
+
+class PathFinder2(PathFinder):
+    def is_valid_next_step(self, path, node):
+        if (node == "end"):
+            return True
+        if (self.is_small_cave(node)):
+            small_caves = [cave for cave in path if self.is_small_cave(cave)]
+            visited_twice = [path.count(cave) for cave in small_caves].count(2)
+            if (visited_twice > 0 and path.count(node) > 0):
+                return False
+        return True
