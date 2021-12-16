@@ -39,15 +39,23 @@ class Searcher:
     def get_shortest_path(self):
         # Run dijkstras search to find path
         shortest_distances = {node: float('inf') for node in np.ndindex(self.matrix.shape)}
-        visited = list()
+        visited = set()
         start_node = (0, 0)
         shortest_distances[start_node] = 0
         frontier = PriorityQueue()
         frontier.put((0, start_node))
 
+        goal_row = self.matrix.shape[0] - 1
+        goal_col = self.matrix.shape[1] - 1
+        goal_position = (goal_row, goal_col)
+
         while not frontier.empty():
             (dist, current_node) = frontier.get()
-            visited.append(current_node)
+
+            if (current_node == goal_position):
+                return shortest_distances[goal_position]
+
+            visited.add(current_node)
 
             for neighbor in self.get_neighbors(current_node):
                 if neighbor not in visited:
@@ -55,11 +63,5 @@ class Searcher:
                     current_risk = shortest_distances[neighbor]
                     new_risk = self.matrix[r][c] + shortest_distances[current_node]
                     if new_risk < current_risk:
-                        frontier.put((new_risk, neighbor))
                         shortest_distances[neighbor] = new_risk
-
-        goal_row = self.matrix.shape[0] - 1
-        goal_col = self.matrix.shape[1] - 1
-        goal_position = (goal_row, goal_col)
-
-        return shortest_distances[goal_position]
+                        frontier.put((new_risk, neighbor))
