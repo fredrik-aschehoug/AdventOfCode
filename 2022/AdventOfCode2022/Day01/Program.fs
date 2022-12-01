@@ -17,6 +17,9 @@ let main argv =
     let text = readText "input.txt"
     let elves = getElvesCalories text
     let topElf = Array.max elves
-    printf $"Top calories = {topElf}"
+
+    let top3Sum = Array.sortDescending elves |> Array.take 3 |> Array.sum
+    printf $"Part 1 = {topElf}"
+    printf $"Part 2 = {top3Sum}"
     
     0 // return an integer exit code
