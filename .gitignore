@@ -1,2 +1,5 @@
 __pycache__
 *input.txt
+/2022/AdventOfCode2022/.vs/AdventOfCode2022
+/2022/AdventOfCode2022/*/bin/Debug/net5.0
+/2022/AdventOfCode2022/*/obj
