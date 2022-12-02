@@ -1,5 +1,9 @@
 ﻿module Day02
 
+let linesToTuples lines =
+    Array.map(fun (x: string) -> x.Split(" ")) lines
+    |> Array.map(fun (x: string[]) -> (x.[0], x.[1]))
+
 let getMoveScore (move: string*string) =
     let opponent, you = move
     match opponent with
@@ -13,10 +17,26 @@ let getMoveScore (move: string*string) =
     | "C" when you = "Y" -> 2 + 0
     | "C" when you = "Z" -> 3 + 3
 
-let getAllScores (lines: string[]) =
-    Array.map(fun (x: string) -> x.Split(" ")) lines
-    |> Array.map(fun (x: string[]) -> (x.[0], x.[1]))
-    |> Array.map getMoveScore
+let transformMove (move: string*string) =
+    let opponent, you = move
+    match opponent with
+    | "A" when you = "X" -> (opponent, "Z")
+    | "A" when you = "Y" -> (opponent, "X")
+    | "A" when you = "Z" -> (opponent, "Y")
+    | "B" when you = "X" -> (opponent, "X")
+    | "B" when you = "Y" -> (opponent, "Y")
+    | "B" when you = "Z" -> (opponent, "Z")
+    | "C" when you = "X" -> (opponent, "Y")
+    | "C" when you = "Y" -> (opponent, "Z")
+    | "C" when you = "Z" -> (opponent, "X")
 
 let part1 (lines: string[]) =
-    getAllScores lines |> Array.sum
+    linesToTuples lines
+    |> Array.map getMoveScore
+    |> Array.sum
+
+let part2 (lines: string[]) =
+    linesToTuples lines
+    |> Array.map transformMove
+    |> Array.map getMoveScore
+    |> Array.sum

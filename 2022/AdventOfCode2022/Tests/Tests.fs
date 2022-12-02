@@ -17,7 +17,7 @@ let ``Day1`` (fileName, part1Result, part2Result) =
 
 [<Theory>]
 [<InlineData("Input/input-day2-test.txt", 15, 12)>]
-[<InlineData("Input/input-day2.txt", 11386, 0)>]
+[<InlineData("Input/input-day2.txt", 11386, 13600)>]
 let ``Day2`` (fileName, part1Result: int, part2Result) =
     let lines = File.ReadAllLines(fileName)
 
