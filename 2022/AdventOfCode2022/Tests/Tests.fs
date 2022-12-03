@@ -18,7 +18,7 @@ let ``Day1`` (fileName, part1Result, part2Result) =
 [<Theory>]
 [<InlineData("Input/input-day2-test.txt", 15, 12)>]
 [<InlineData("Input/input-day2.txt", 11386, 13600)>]
-let ``Day2`` (fileName, part1Result: int, part2Result) =
+let ``Day2`` (fileName, part1Result, part2Result) =
     let lines = File.ReadAllLines(fileName)
 
     let score = Day02.part1 lines
@@ -26,3 +26,15 @@ let ``Day2`` (fileName, part1Result: int, part2Result) =
 
     Assert.Equal(part1Result, score)
     Assert.Equal(part2Result, correctScore)
+
+[<Theory>]
+[<InlineData("Input/input-day3-test.txt", 157, 70)>]
+[<InlineData("Input/input-day3.txt", 7872, 2497)>]
+let ``Day3`` (fileName, part1Result, part2Result) =
+    let lines = File.ReadAllLines(fileName)
+    
+    let prioritySum = Day03.part1 lines
+    let badgeSum = Day03.part2 lines
+    
+    Assert.Equal(part1Result, prioritySum)
+    Assert.Equal(part2Result, badgeSum)

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Day01\Day01.fsproj" />
     <ProjectReference Include="..\Day02\Day02.fsproj" />
+    <ProjectReference Include="..\Day03\Day03.fsproj" />
   </ItemGroup>
 
 </Project>
