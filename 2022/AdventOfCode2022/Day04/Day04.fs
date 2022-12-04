@@ -15,14 +15,14 @@ let isStrictOverlap (pair: int[][]) =
 let isOverlap (pair: int[][]) =
     pair.[0].Any(fun x -> pair.[1].Contains(x))
 
-let part1 (lines: string[]) =
-    Array.map(fun (line: string) -> line.Split(",")) lines
-    |> Array.map parseSections
-    |> Array.filter isStrictOverlap
-    |> (fun x -> x.Count())
+let part1 =
+    Array.map(fun (line: string) -> line.Split(","))
+    >> Array.map parseSections
+    >> Array.filter isStrictOverlap
+    >> (fun x -> x.Count())
 
-let part2 (lines: string[]) =
-    Array.map(fun (line: string) -> line.Split(",")) lines
-    |> Array.map parseSections
-    |> Array.filter isOverlap
-    |> (fun x -> x.Count())
+let part2 =
+    Array.map(fun (line: string) -> line.Split(","))
+    >> Array.map parseSections
+    >> Array.filter isOverlap
+    >> (fun x -> x.Count())
