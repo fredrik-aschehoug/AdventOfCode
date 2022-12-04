@@ -38,3 +38,15 @@ let ``Day3`` (fileName, part1Result, part2Result) =
     
     Assert.Equal(part1Result, prioritySum)
     Assert.Equal(part2Result, badgeSum)
+
+[<Theory>]
+[<InlineData("Input/input-day4-test.txt", 2, 4)>]
+[<InlineData("Input/input-day4.txt", 431, 823)>]
+let ``Day4`` (fileName, part1Result, part2Result) =
+    let lines = File.ReadAllLines(fileName)
+        
+    let strictOverlappingPairs = Day04.part1 lines
+    let overlappingPairs = Day04.part2 lines
+        
+    Assert.Equal(part1Result, strictOverlappingPairs)
+    Assert.Equal(part2Result, overlappingPairs)
