@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Day05.fs" />
     <Compile Include="Tests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
@@ -29,7 +30,8 @@
     <ProjectReference Include="..\Day01\Day01.fsproj" />
     <ProjectReference Include="..\Day02\Day02.fsproj" />
     <ProjectReference Include="..\Day03\Day03.fsproj" />
-    <ProjectReference Include="..\Day04\Day04.fsproj" />
+	<ProjectReference Include="..\Day04\Day04.fsproj" />
+	<ProjectReference Include="..\Day05\Day05.fsproj" />
   </ItemGroup>
 
 </Project>
