@@ -52,13 +52,13 @@ let ``Day4`` (fileName, part1Result, part2Result) =
     Assert.Equal(part2Result, overlappingPairs)
 
 [<Theory>]
-[<InlineData("Input/input-day5-test.txt", "CMZ", 0)>]
-[<InlineData("Input/input-day5.txt", "TLNGFGMFN", 0)>]
+[<InlineData("Input/input-day5-test.txt", "CMZ", "MCD")>]
+[<InlineData("Input/input-day5.txt", "TLNGFGMFN", "FGLQJCMBD")>]
 let ``Day5`` (fileName, part1Result, part2Result) =
     let text = File.ReadAllText(fileName)
         
     let crates = Day05.part1 text
-    //let overlappingPairs = Day05.part2 lines
+    let crates9001 = Day05.part2 text
         
     Assert.Equal(part1Result, crates)
-    //Assert.Equal(part2Result, overlappingPairs)
+    Assert.Equal(part2Result, crates9001)

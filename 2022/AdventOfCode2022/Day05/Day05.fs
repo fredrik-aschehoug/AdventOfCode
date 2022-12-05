@@ -3,6 +3,7 @@
 open System
 open System.Linq
 open System.Text.RegularExpressions
+open System.Collections.Generic
 
 let rec getStackPosition (stack: int) =
     if stack = 0 then 1
@@ -10,7 +11,7 @@ let rec getStackPosition (stack: int) =
 
 let parseLine (line: string[], stacksCount: int) = 
     let stacks = [|0 .. stacksCount - 1|]
-    let mutable positions: string list = [] // not being filled
+    let mutable positions: string list = []
     for stack in stacks do
         let position = getStackPosition stack
         let value = line.ElementAtOrDefault(position)
@@ -28,7 +29,7 @@ let parseStacks (text: string) =
     let rx = Regex(@"\w", RegexOptions.Compiled)
     
     let stacksCount = rx.Matches(lines.First()).Count
-    let stacks = [|for stack in [1 .. stacksCount] do new System.Collections.Generic.Stack<string>()|]
+    let stacks = [|for stack in [1 .. stacksCount] do new Stack<string>()|]
     let parsedLines = parseLines (lines, stacksCount)
     for line in parsedLines do
         for i = 0 to parsedLines.Count() do
@@ -46,6 +47,7 @@ let parseInstruction (instruction: string) =
 let parseInstructions =
     Array.map parseInstruction
     
+let getResult (stacks: Stack<string>[]) = String.Join("", [for stack in stacks do stack.Peek()])
 
 let part1 (text: string) =
     let [|stacksText; instructionsText|] = text.Split("\r\n\r\n")
@@ -59,7 +61,22 @@ let part1 (text: string) =
             let item = stacks.[source - 1].Pop()
             stacks.[destination - 1].Push(item)
     
-    String.Join("", [for stack in stacks do stack.Peek()])
+    getResult stacks
 
 
-let part2 (lines: string[]) = 0
+let part2 (text: string) =
+    let [|stacksText; instructionsText|] = text.Split("\r\n\r\n")
+    let stacks = parseStacks stacksText
+
+    let instructions = parseInstructions (instructionsText.Split("\r\n"))
+
+    for instruction in instructions do
+        let (amount, source, destination) = instruction
+        let tempStack = new Stack<string>()
+        for i = 0 to amount - 1 do
+            let item = stacks.[source - 1].Pop()
+            tempStack.Push(item)
+        while tempStack.Count > 0 do
+            stacks.[destination - 1].Push(tempStack.Pop())
+
+    getResult stacks
