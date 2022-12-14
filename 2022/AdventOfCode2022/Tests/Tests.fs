@@ -6,7 +6,7 @@ open Xunit
 [<Theory>]
 [<InlineData("Input/input-day1-test.txt", 24000, 45000)>]
 [<InlineData("Input/input-day1.txt", 68775, 202585)>]
-let ``Day1`` (fileName, part1Result, part2Result) =
+let ``Day01`` (fileName, part1Result, part2Result) =
     let text = File.ReadAllText(fileName)
 
     let topElf = Day01.part1 text
@@ -18,7 +18,7 @@ let ``Day1`` (fileName, part1Result, part2Result) =
 [<Theory>]
 [<InlineData("Input/input-day2-test.txt", 15, 12)>]
 [<InlineData("Input/input-day2.txt", 11386, 13600)>]
-let ``Day2`` (fileName, part1Result, part2Result) =
+let ``Day02`` (fileName, part1Result, part2Result) =
     let lines = File.ReadAllLines(fileName)
 
     let score = Day02.part1 lines
@@ -30,7 +30,7 @@ let ``Day2`` (fileName, part1Result, part2Result) =
 [<Theory>]
 [<InlineData("Input/input-day3-test.txt", 157, 70)>]
 [<InlineData("Input/input-day3.txt", 7872, 2497)>]
-let ``Day3`` (fileName, part1Result, part2Result) =
+let ``Day03`` (fileName, part1Result, part2Result) =
     let lines = File.ReadAllLines(fileName)
     
     let prioritySum = Day03.part1 lines
@@ -42,7 +42,7 @@ let ``Day3`` (fileName, part1Result, part2Result) =
 [<Theory>]
 [<InlineData("Input/input-day4-test.txt", 2, 4)>]
 [<InlineData("Input/input-day4.txt", 431, 823)>]
-let ``Day4`` (fileName, part1Result, part2Result) =
+let ``Day04`` (fileName, part1Result, part2Result) =
     let lines = File.ReadAllLines(fileName)
         
     let strictOverlappingPairs = Day04.part1 lines
@@ -54,7 +54,7 @@ let ``Day4`` (fileName, part1Result, part2Result) =
 [<Theory>]
 [<InlineData("Input/input-day5-test.txt", "CMZ", "MCD")>]
 [<InlineData("Input/input-day5.txt", "TLNGFGMFN", "FGLQJCMBD")>]
-let ``Day5`` (fileName, part1Result, part2Result) =
+let ``Day05`` (fileName, part1Result, part2Result) =
     let text = File.ReadAllText(fileName)
         
     let crates = Day05.part1 text
@@ -73,7 +73,7 @@ let ``Day5`` (fileName, part1Result, part2Result) =
     "vldvlvvhwhttcsttpntnvvqpqpddmlddwhwcwnwmwfwppdrrhllcwwgwhwvhwhshchshtsstzstztgtlggcwwtptrppfpggwpwmppnfpfnfznffmvfmvffgfwwwgrrqgglrgrqqlslhhgjgwwdswsbwwqswqwnqwqpqttqstqtjqqctcbtcbttcptpbbsmmhggwmggjllcpcvcrrphpjjwzwgzgtzggscggwdgghlhnhddlclrcchllrlbbnlbbgpbgghvggpbgpgssbszzjbbcpbpttwztwwgngnqqgllcvlvlzvzwwzssbppjwwvswwbjwbjwwwsjsdjsszmssfvsvcscqssnbnzbzzhsszttfvvdllzjzsjjzzvzsvzzdvvcpphfhzhrzrnnwffnrrhwrhrnrhnrrgfgmmzwmzmhzzsrzrgggnfntnpnqqdhhmrmrrqdqwqsqmssmllmvmgglttdmdffwzzhszhzphzphplpvpzvvsvcvgvqgqpgqqrmqmqssdbdcdpphddvppfggwrgrdgrggtvggrttmpmvmnmwnmmlcccwssfjftfbbgqbbnlldzlddzbbvmmvbmvvbsszggmnggqsqvssdlddqbbtfbttlhhlssplphlhzzcmmdcmmlqlqmmtddztzctzzlglwlzwwsmsddbrrzqqpdpjdpjjzhjjjzttvvwcvcdvvwqvvwqqgpgjgwgvgmmdjjmbbttmffwgwgppspzzvddjnjppmsscjczcqcczlzjzbbzmzllsshrrdtdttjdtdnnwbwttzptztrzzgfgfqfjjlwjjbfbsbmmhphqqjlqjjjshsvvrzrffvnfftrrpzzrdrbbcqbqjqccphhwfwgfwgwgwzzhggddctcsttjgjppghppfhhlnhhhwfwrfrggtjjgjbgbjbrrssjvvlcvvdzvdzzjhhgpprnpnpggfmfgfzfrzzsjjwhhrmmmvppgfffdsfddwlddmccjfcjjrwwsmwsstlsszbbjssjtsjjmpjpqqzffhphfffrzffnbnvnzvnvsvjjbljlflglrlvvghhcrhccnhccdbcdclcbbgffhwhnwwrwbbngnwwlpwlwsllsffzvzbzhbhppvdvfdvffvsvlslcslsqqszqzrrqbrrpjjvgjggbvvpbblnlvnnvrrprbpbvbccrjsdfrnqvhgfrwtvqjfzflnqqgbwlvfwwmrgnsltsqjfcctdwhqrstpvllhfrbnvnhvvgfvhbsgppslqnhmwdnrjnpfmrppppqpmrmcvtndrgwngrblpvrgnbhgtflthdjdtqhwcfzbdwsjshhnglprfcjfdwffmhbvhshbzsgdsbdwpcjfhrccqmjslqjjrwnbtqftqlvgnpmmzlfnmjzvrfslmmvhqwzjqbwsqfcnlmgdwlcbrlqlfwzhcfjsnncnnjqltfccmllhnjczqssjnjmhqbhqzdplbvfdpmdjmgthvqgjzqqschzgtmpdzmvvhlrwjpbqfplcqdbjfjfcrzdclctldvvqphtnvmgzvwprhzmbsbgfjlhvbtcmnccrgrpjlcjqqfcgjhtwvfstrtzszgcprmcngbhbdvjbfvgqdlhzgtzcjqnjmdtmwzchcfhzhgwprgrzbfwbhstfbprhnbzhsglmwhcjbppnshmzlnzsmbhcrmvpdgftfrwjfnmdvtrrqwjmzlbdjppsnvmlstsnrjwslqtqfmfcspzgrqhshhvclvqdfpbmzvsnthmcrzdmzqcjnnmbwbdlbfmcrzjjsrjbwchlvljplqdbjfchbslcvbjvvzfgdzmmnrgqwftppgpfwhfvdqqsrphrqmdtzjghlldfpgnczzjhqhfjvgqmcpzqssfqsfblcvqfttznpmvczprcptgcfwwlwsmqvfrjzcwbhppsjghmltqtcqljmpjzddncbslqdvgzhdvfpdpgpzljrfnjwdtnbdjwzjvmhqvnrdrjmhcfsbjcwtflljwjvtjbsbhzbghnzwtwpwzzwnfhwszsghggqthcbtwjrhdphbdslzmwhpmtjfbnpzspfqrvvtsjpvjmbtwrsqvfzzphllbvmvczsphdtblgdczjsqqthgscdqpvnmbpblspbcmpgjjtjtdrwhrqcgbrvlcsrwzwnjlgbfjbfgwpqpvnnmmgbdrhrwsptmddvtgbjhgzcphzmscjrqlnngpsnmjhvtmnhmqmcwdpjpbjsntcgppqrjndfsfhrhcvgcmrfrrsvnddwjsndlwffrgqnldqnvtgfvdrwtrlcqhltmbvdndzpdqndqrbtzqwbmbtzzsqftjftcnbrtsgvdrmnqlbbmhwmzpngltcslwdnpzpvstpdtfdcqvlwtbppsjvpdbspzlwnfvgcslzvmrpgplbnrvwpfwnrhcncdzptrjsqvghrczmrfwfntqlvlccwtbwqdcngzlqqvvnvfttqmcbqfqndhlsmbvcnstjcbpffmsptdnqbntnhhdctgdbnvwzgwznsgpvmslpmlcffsdtfnlcmbdgbntcslrlhfmrpddmjjttbtcrgbmfsbbwphtmlrdrgffdlnrwndhttjrplstwfwlpnljlcjphdvdvslwvnstqlrsgwdltlqwzdgsltzjqsgwqpbzgvqbdmvqtdgsnhttqprttzrnmddzdnqsgmnhfrmmfnrmltgjqpmgmdzdwpnzdsgstmwlgstmtjtqlhngmpwdqscrjmpmndddppsgthtbmznndswpsftcfltmhbbglnlmlszsssrlgbzcqpngvtgttlblsthmrltgctpgpjmhqqbldfgcrmclsmjhnjspzgwpmwncjgwrgdjmfgrpndztfdssmjhfmstgbjjzvmrpbmfzljpffwgvszwvtclfdnnbswzpjgthcbzpcbmgfvhfwnfthjdmnzdptqflzldnvnmfqnbggsrzjjssdntqhsjltjlfvjhncbrfbhllmqdpdnlbjptdcrqqghvvfvzzvtbvnjhshptcmgcnlmmpgdggdsfnpfsgrbcnfvrvfcqdfdfbgfvqcspvnrrljsgdtsbbcvcqnlwmrfgjhbdnjqgpggnpqtqgwspgljbrsggnmbmdbctwsdzqjmzrcwqgsvnhlpnlnqgfvgdfpgwsbqpqjcjpwwbrtzqhhgswggwnhmzwtvrqcrgbsrjspmczctgprgcwjtnzghvzqgnpmfqdswnzfzdbpdnpcgmwdrpmjtzhhwcnrrpfvqsgbrzngmwdgvjnmcftcjpcmdvcwjgfgvjrblsdnbsgfmjnvvvfwpfhztbgfddlcljzmwrwglnrfbnphlpvvcbfnwpsmsnhshzwrpnljzstmglrwdcctqlbwvqtfpjjdqzgncwgsnhczhvnvnzzmsjhfvgpdrhsmgnrfjcrzblzncdlffjrcqrqqdnjhgwgdgjlgbtphzgrjvmgnqrvdgmtgvpdbzqcvsfctrntjsnfcwnzpslzsvmtjhtcvcdsbqflbmtvclssrvcwjwcbspjgqhznzpttlbsnrpdrnqsddlcvjdrnqcgjhjfdclhwscdpbsjzcmrhgfwdnqbzqjsdqwbqdfcrztzfvclvbnhqstjztqdmsvlfqzmllphgrnwjqpdlrdnsbdltrggvlmdpfdwrdwnsdnscfcjzmrwqpsjwzrqcqcfndlvtfftbhdcbgcgtrfqrqnvwgbpstrtzgpjcjswfcwgvfnwlpprthntmlqbchjcwnqgppchgtvrzjbdzptfqqbmchmpqlnnfvpghjnmshpcjgsprbjpqnpwwddnswnfjvbzwszplhnhgzmzdqncmqrqtbqhdwbtrbrljpcwbdhjzvcqpdgvbtczlhwwzfmgvffnbcglpdqjdsnhhtnvvmtnhlbqcfqjfcgmcnqstzbgmqcfsgrzncwcfrlpsctpspvvdzwtbrhqzhfcwvwqvtzrmfjgpmlsdjmlgwhcldqlhsjvprvnmzcsldzfpzhmzdbqbpwnrsffswbjcwjgblnlcwzqlmcgfstqggdbsqpcpqcgfvn",
     1198,
     3120)>]
-let ``Day6`` (buffer, part1Result, part2Result) =
+let ``Day06`` (buffer, part1Result, part2Result) =
     let packetStart = Day06.part1 buffer
     let messageStart= Day06.part2 buffer
         
@@ -82,7 +82,7 @@ let ``Day6`` (buffer, part1Result, part2Result) =
 [<Theory>]
 [<InlineData("Input/input-day8-test.txt", 21, 8)>]
 [<InlineData("Input/input-day8.txt", 1676, 313200)>]
-let ``Day8`` (fileName, part1Result, part2Result) =
+let ``Day08`` (fileName, part1Result, part2Result) =
     let lines = File.ReadAllLines(fileName)
         
     let sum = Day08.part1 lines
@@ -90,3 +90,15 @@ let ``Day8`` (fileName, part1Result, part2Result) =
         
     Assert.Equal(part1Result, sum)
     Assert.Equal(part2Result, topScenicScore)
+
+[<Theory>]
+[<InlineData("Input/input-day10-test.txt", 13140, 0)>]
+[<InlineData("Input/input-day10.txt", 17380, 0)>]
+let ``Day10`` (fileName, part1Result, part2Result) =
+    let lines = File.ReadAllLines(fileName)
+        
+    let sum = Day10.part1 lines
+    //let topScenicScore = Day10.part2 lines
+        
+    Assert.Equal(part1Result, sum)
+    //Assert.Equal(part2Result, topScenicScore)
