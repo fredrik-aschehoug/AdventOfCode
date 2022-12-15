@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
     <GenerateProgramFile>false</GenerateProgramFile>
@@ -33,6 +33,7 @@
 	<ProjectReference Include="..\Day04\Day04.fsproj" />
 	<ProjectReference Include="..\Day05\Day05.fsproj" />
 	<ProjectReference Include="..\Day06\Day06.fsproj" />
+	<ProjectReference Include="..\Day07\Day07.fsproj" />
 	<ProjectReference Include="..\Day08\Day08.fsproj" />
 	<ProjectReference Include="..\Day10\Day10.fsproj" />
   </ItemGroup>

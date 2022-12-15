@@ -42,11 +42,24 @@ let runCommands (commands: Command list) =
 let rec getRegisterInCycle (cycle: int, results: Result list) =
     let result = results.Where(fun result -> result.Clock = cycle)
     if result.Count() <> 0 then result.First().X
+    elif cycle < 0 then 1
     else getRegisterInCycle (cycle - 1, results)
 
 let getSum (results: Result list) =
     [for cycle in cycles -> getRegisterInCycle(cycle, results) * cycle] |> List.sum
 
+let getPixel (index: int, x: int) =
+    let sprite = [(x-1)..(x+1)]
+    if sprite.Contains(index) then "#" else "."
 
 let part1 (lines: string[]) =
     lines |> Array.toList |> List.map parseCommand |> runCommands |> getSum
+
+let part2 (lines: string[]) =
+    let results = lines |> Array.toList |> List.map parseCommand |> runCommands
+
+    [for cycle in 1..240 -> getRegisterInCycle(cycle, results)]
+    |> List.chunkBySize 40
+    |> List.map List.indexed
+    |> List.map(fun line -> List.map getPixel line |> String.concat "") 
+    |> List.iter(fun line -> printf $"{line}\n")
