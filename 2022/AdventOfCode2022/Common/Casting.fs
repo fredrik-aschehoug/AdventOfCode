@@ -7,4 +7,6 @@ module Casting =
     
     let stringToInt = Int32.Parse
 
+    let stringToFloat = Int32.Parse >> float
+
     let charToInt (c: char) = stringToInt (toString c)

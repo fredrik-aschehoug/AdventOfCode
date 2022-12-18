@@ -2,18 +2,17 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-    <WarnOn>3390;$(WarnOn)</WarnOn>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Input\input-day1-test.txt">
+    <Content Include="Input\input-day11-test.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Input\input-day1.txt">
+    <Content Include="Input\input-day11.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Day01.fs" />
+    <Compile Include="Day11.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

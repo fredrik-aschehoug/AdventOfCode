@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Text.fs" />
     <Compile Include="Collections.fs" />
     <Compile Include="Casting.fs" />
   </ItemGroup>

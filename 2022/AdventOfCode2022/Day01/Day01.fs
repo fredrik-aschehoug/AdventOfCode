@@ -1,14 +1,13 @@
 ﻿module Day01
 
 open System
+open Common
 
-let splitDoubleNewline (text: string) = text.Split("\r\n\r\n")
-let splitNewline (text: string) = text.Split("\r\n")
-let castToInt (lines: string[]) = Array.map Int32.Parse lines
+let castToInt (lines: string[]) = Array.map Casting.stringToInt lines
 
 let getElvesCalories =
-    splitDoubleNewline
-    >> Array.map splitNewline
+    Text.splitDoubleNewline
+    >> Array.map Text.splitNewline
     >> Array.map castToInt
     >> Array.map Array.sum
 
