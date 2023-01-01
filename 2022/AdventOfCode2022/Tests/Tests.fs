@@ -112,3 +112,15 @@ let ``Day11`` (fileName, part1Result, part2Result: int64) =
         
     Assert.Equal(part1Result, monkeyBusiness)
     Assert.Equal(part2Result, monkeyBusinessV2)
+
+[<Theory>]
+[<InlineData("Input/input-day13-test.txt", 13, 0)>]
+[<InlineData("Input/input-day13.txt", 6478, 0)>]
+let ``Day13`` (fileName, part1Result, part2Result) =
+    let text = File.ReadAllText(fileName)
+        
+    let sum = Day13.part1 text
+    //let monkeyBusinessV2 = Day13.part2 text
+        
+    Assert.Equal(part1Result, sum)
+    //Assert.Equal(part2Result, monkeyBusinessV2)

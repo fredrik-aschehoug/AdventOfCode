@@ -10,3 +10,8 @@ module Casting =
     let stringToFloat = Int32.Parse >> float
 
     let charToInt (c: char) = stringToInt (toString c)
+
+    let tryToInt (s: string) = 
+        match Int32.TryParse s with
+        | true, v -> Some v
+        | false, _ -> None

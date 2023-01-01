@@ -19,3 +19,5 @@ module Collections =
         l |> Enumerable.ToArray |> Array.iter(fun item -> queue.Enqueue(item))
         queue
 
+    let toTuple (pair: array<'a>) = (pair.[0], pair.[1])
+
