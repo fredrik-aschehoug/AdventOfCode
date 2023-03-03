@@ -32,7 +32,7 @@ let parseStacks (text: string) =
     let stacks = [|for stack in [1 .. stacksCount] do new Stack<string>()|]
     let parsedLines = parseLines (lines, stacksCount)
     for line in parsedLines do
-        for i = 0 to parsedLines.Count() do
+        for i = 0 to parsedLines.Length do
             let element = line.ElementAtOrDefault(i)
             if (element <> " " && element <> null) then stacks.[i].Push(element)
     stacks
@@ -62,7 +62,6 @@ let part1 (text: string) =
             stacks.[destination - 1].Push(item)
     
     getResult stacks
-
 
 let part2 (text: string) =
     let [|stacksText; instructionsText|] = text.Split("\r\n\r\n")

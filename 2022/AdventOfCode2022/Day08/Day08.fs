@@ -1,8 +1,8 @@
 ﻿module Day08
 
 open System
-open System.Linq
 open Common
+open Microsoft.FSharp.Collections
 
 let getMax (x: int, y: int) = Math.Max(x, y)
 
@@ -17,8 +17,8 @@ let rec getVisibleFromLeft (i: int, line: int list, top: int, result: int list) 
     else getVisibleFromLeft (i + 1, line, top, result @ [0])
 
 let getVisibleInLine (line: int list) =
-    let left = getVisibleFromLeft (0, line, line.First(), [])
-    let right = getVisibleFromLeft (0, line |> List.rev, line.Last(), []) |> List.rev
+    let left = getVisibleFromLeft (0, line, line.Head, [])
+    let right = getVisibleFromLeft (0, line |> List.rev, (List.rev line).Head, []) |> List.rev
     List.map2 (fun left right -> getMax(left, right)) left right
 
 let rec getScoreFromLeft (heightIndex: int, i: int, line: int list, score: int) =

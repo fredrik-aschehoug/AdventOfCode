@@ -1,7 +1,6 @@
 ﻿module Day10
 
 open System
-open System.Linq
 open System.Collections.Generic
 
 let cycles = [20; 60; 100; 140; 180; 220;]
@@ -40,8 +39,8 @@ let runCommands (commands: Command list) =
     results |> List.ofSeq
 
 let rec getRegisterInCycle (cycle: int, results: Result list) =
-    let result = results.Where(fun result -> result.Clock = cycle)
-    if result.Count() <> 0 then result.First().X
+    let result = List.filter(fun result -> result.Clock = cycle) results
+    if result.Length <> 0 then result.Head.X
     elif cycle < 0 then 1
     else getRegisterInCycle (cycle - 1, results)
 
@@ -50,7 +49,7 @@ let getSum (results: Result list) =
 
 let getPixel (index: int, x: int) =
     let sprite = [(x-1)..(x+1)]
-    if sprite.Contains(index) then "#" else "."
+    if List.contains index sprite then "#" else "."
 
 let part1 (lines: string[]) =
     lines |> Array.toList |> List.map parseCommand |> runCommands |> getSum
