@@ -35,7 +35,7 @@ let getScoreInLine (line: int list) =
     let right = line |> List.rev |> List.indexed |> List.map(fun (index, tree) -> getScoreFromLeft (index, Math.Max(index - 1, 0), line |> List.rev, 0)) |> List.rev
     List.zip left right
 
-let part1 (lines: string[]) =
+let part1 lines =
     let forest = lines |> Array.toList |> List.map parseLine
     let visibleHorizontal = forest |> List.map getVisibleInLine
     let visibleVertical = forest |> Collections.transpose2dList |> List.map getVisibleInLine |> Collections.transpose2dList
@@ -44,7 +44,7 @@ let part1 (lines: string[]) =
 
     visibleAmount
 
-let part2 (lines: string[]) =
+let part2 lines =
     let forest = lines |> Array.toList |> List.map parseLine
     let scoresHorizontal = forest |> List.map getScoreInLine |> List.concat
     let scoresVertical = forest |> Collections.transpose2dList |> List.map getScoreInLine |> Collections.transpose2dList |> List.concat

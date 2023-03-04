@@ -9,7 +9,7 @@ let rec getStackPosition (stack: int) =
     if stack = 0 then 1
     else 4 + getStackPosition (stack - 1)
 
-let parseLine (line: string[], stacksCount: int) = 
+let parseLine (line: string[]) stacksCount = 
     let stacks = [|0 .. stacksCount - 1|]
     let mutable positions: string list = []
     for stack in stacks do
@@ -19,10 +19,10 @@ let parseLine (line: string[], stacksCount: int) =
 
     positions |> List.rev
 
-let parseLines (lines: string[], stacksCount: int) =
+let parseLines (lines: string[]) stacksCount =
     Array.map(fun (x: string) -> x.ToArray()) lines
     |> Array.map (Array.map(fun x -> x.ToString()))
-    |> Array.map(fun line -> parseLine (line, stacksCount))
+    |> Array.map(fun line -> parseLine line stacksCount)
 
 let parseStacks (text: string) =
     let lines = text.Split("\r\n").SkipLast(1).ToArray() |> Array.rev
@@ -30,7 +30,7 @@ let parseStacks (text: string) =
     
     let stacksCount = rx.Matches(lines.First()).Count
     let stacks = [|for stack in [1 .. stacksCount] do new Stack<string>()|]
-    let parsedLines = parseLines (lines, stacksCount)
+    let parsedLines = parseLines lines stacksCount
     for line in parsedLines do
         for i = 0 to parsedLines.Length do
             let element = line.ElementAtOrDefault(i)
