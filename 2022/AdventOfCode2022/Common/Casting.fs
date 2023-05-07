@@ -4,7 +4,7 @@ open System
 
 module Casting =
     let toString x = x.ToString()
-    
+
     let stringToInt = Int32.Parse
 
     let stringToFloat = Int32.Parse >> float

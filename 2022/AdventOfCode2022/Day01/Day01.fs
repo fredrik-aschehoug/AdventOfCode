@@ -3,7 +3,7 @@
 open System
 open Common
 
-let castToInt (lines: string[]) = Array.map Casting.stringToInt lines
+let castToInt = Array.map Casting.stringToInt
 
 let getElvesCalories =
     Text.splitDoubleNewline

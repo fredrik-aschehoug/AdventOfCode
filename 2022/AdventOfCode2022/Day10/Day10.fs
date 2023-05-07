@@ -51,11 +51,12 @@ let getPixel (index: int, x: int) =
     let sprite = [(x-1)..(x+1)]
     if List.contains index sprite then "#" else "."
 
-let part1 lines =
-    lines |> Array.toList |> List.map parseCommand |> runCommands |> getSum
+let getResults = Array.toList >> List.map parseCommand >> runCommands
+
+let part1 = getResults >> getSum
 
 let part2 lines =
-    let results = lines |> Array.toList |> List.map parseCommand |> runCommands
+    let results = getResults lines
 
     [for cycle in 1..240 -> getRegisterInCycle cycle results]
     |> List.chunkBySize 40

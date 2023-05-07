@@ -4,6 +4,7 @@ open System
 open System.Collections
 open System.Text.RegularExpressions
 open Common
+open Common.SystemExtensions
 
 type Test = { DivisibleBy: int; IfTrue: int; IfFalse: int; }
 type Monkey = { Items: Generic.Queue<float>; Operation: string; Test: Test; Inspections: int64; }
@@ -14,16 +15,16 @@ let parseMonkey raw =
         Items = lines.[1].Remove(0, 18).Split(", ") |> Array.map Casting.stringToFloat |> Collections.toQueue;
         Operation = lines.[2].Remove(0, 23);
         Test = {
-            DivisibleBy = Casting.stringToInt (lines.[3].Remove(0, 21));
-            IfTrue = Casting.stringToInt (lines.[4].Remove(0, 29));
-            IfFalse = Casting.stringToInt (lines.[5].Remove(0, 30));
+            DivisibleBy = lines.[3].Remove(0, 21).ToInt;
+            IfTrue = lines.[4].Remove(0, 29).ToInt;
+            IfFalse = lines.[5].Remove(0, 30).ToInt;
         };
         Inspections = 0;
     }
 
 let getNumber (operation: string) (fallback: float) =
     let rxMatch = Regex(@"\d+", RegexOptions.Compiled).Match(operation)
-    if rxMatch.Success then Casting.stringToFloat rxMatch.Value else fallback
+    if rxMatch.Success then rxMatch.Value.ToFloat else fallback
 
 let getWorryLevel (item: float) (operation: string) =
     let op = operation.[0]

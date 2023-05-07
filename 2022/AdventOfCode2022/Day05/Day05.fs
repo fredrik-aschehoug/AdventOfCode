@@ -11,13 +11,11 @@ let rec getStackPosition (stack: int) =
 
 let parseLine (line: string[]) stacksCount = 
     let stacks = [|0 .. stacksCount - 1|]
-    let mutable positions: string list = []
-    for stack in stacks do
+    let getPosition stack =
         let position = getStackPosition stack
-        let value = line.ElementAtOrDefault(position)
-        positions <- value :: positions
+        line.ElementAtOrDefault(position)
 
-    positions |> List.rev
+    [|for stack in stacks do getPosition stack|]
 
 let parseLines (lines: string[]) stacksCount =
     Array.map(fun (x: string) -> x.ToArray()) lines
@@ -37,26 +35,29 @@ let parseStacks (text: string) =
             if (element <> " " && element <> null) then stacks.[i].Push(element)
     stacks
 
+type Instruction = { Amount: int; Source: int; Destination: int; }
+
 let parseInstruction (instruction: string) =
     let instructions = instruction.Split(" ")
-    let amount = Int32.Parse(instructions.[1])
-    let source = Int32.Parse(instructions.[3])
-    let destination = Int32.Parse(instructions.[5])
-    (amount, source, destination)
+    { Amount = Int32.Parse(instructions.[1]);
+      Source = Int32.Parse(instructions.[3]);
+      Destination = Int32.Parse(instructions.[5]) }
 
 let parseInstructions =
     Array.map parseInstruction
     
 let getResult (stacks: Stack<string>[]) = String.Join("", [for stack in stacks do stack.Peek()])
 
-let part1 (text: string) =
-    let [|stacksText; instructionsText|] = text.Split("\r\n\r\n")
-    let stacks = parseStacks stacksText
+let parseText (text: string) =
+     let parts = text.Split("\r\n\r\n")
+     (parts.[0], parts.[1])
 
+let part1 (text: string) =
+    let stacksText, instructionsText = parseText text
+    let stacks = parseStacks stacksText
     let instructions = parseInstructions (instructionsText.Split("\r\n"))
     
-    for instruction in instructions do
-        let (amount, source, destination) = instruction
+    for {Amount = amount; Source = source; Destination = destination} in instructions do
         for i = 0 to amount - 1 do
             let item = stacks.[source - 1].Pop()
             stacks.[destination - 1].Push(item)
@@ -64,13 +65,11 @@ let part1 (text: string) =
     getResult stacks
 
 let part2 (text: string) =
-    let [|stacksText; instructionsText|] = text.Split("\r\n\r\n")
+    let stacksText, instructionsText = parseText text
     let stacks = parseStacks stacksText
-
     let instructions = parseInstructions (instructionsText.Split("\r\n"))
 
-    for instruction in instructions do
-        let (amount, source, destination) = instruction
+    for {Amount = amount; Source = source; Destination = destination} in instructions do
         let tempStack = new Stack<string>()
         for i = 0 to amount - 1 do
             let item = stacks.[source - 1].Pop()

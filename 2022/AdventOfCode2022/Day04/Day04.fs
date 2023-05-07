@@ -19,10 +19,10 @@ let part1 =
     Array.map(fun (line: string) -> line.Split(","))
     >> Array.map parseSections
     >> Array.filter isStrictOverlap
-    >> (fun x -> x.Length)
+    >> Array.length
 
 let part2 =
     Array.map(fun (line: string) -> line.Split(","))
     >> Array.map parseSections
     >> Array.filter isOverlap
-    >> (fun x -> x.Length)
+    >> Array.length
