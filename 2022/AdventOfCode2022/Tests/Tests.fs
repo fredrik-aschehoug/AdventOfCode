@@ -79,6 +79,17 @@ let ``Day06`` (buffer, part1Result, part2Result) =
         
     Assert.Equal(part1Result, packetStart)
     Assert.Equal(part2Result, messageStart)
+
+[<Theory>]
+[<InlineData("Input/input-day7-test.txt", 95437, 0)>]
+[<InlineData("Input/input-day7.txt", 2061777, 0)>]
+let ``Day07`` (fileName, part1Result, part2Result) =
+    let lines = File.ReadAllLines(fileName)
+        
+    let sum = Day07.part1 lines
+        
+    Assert.Equal(part1Result, sum)
+
 [<Theory>]
 [<InlineData("Input/input-day8-test.txt", 21, 8)>]
 [<InlineData("Input/input-day8.txt", 1676, 313200)>]
