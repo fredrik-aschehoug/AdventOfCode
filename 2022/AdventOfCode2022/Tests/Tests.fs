@@ -105,6 +105,18 @@ let ``Day08`` (fileName, part1Result, part2Result) =
     Assert.Equal(part2Result, topScenicScore)
 
 [<Theory>]
+[<InlineData("Input/input-day9-test.txt", 13, 0)>]
+[<InlineData("Input/input-day9.txt", 6212, 0)>]
+let ``Day09`` (fileName, part1Result, part2Result) =
+    let lines = File.ReadAllLines(fileName)
+        
+    let positionsVisited = Day09.part1 lines
+    //let x = Day08.part2 lines
+        
+    Assert.Equal(part1Result, positionsVisited)
+    //Assert.Equal(part2Result, x)
+
+[<Theory>]
 [<InlineData("Input/input-day10-test.txt", 13140)>]
 [<InlineData("Input/input-day10.txt", 17380)>]
 let ``Day10`` (fileName, part1Result) =

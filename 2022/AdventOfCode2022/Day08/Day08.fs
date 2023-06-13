@@ -24,11 +24,11 @@ let getVisibleInLine (line: int list) =
 
 let rec getScoreFromLeft heightIndex i score (line: int list)  =
     let height = line.Item heightIndex
-    if heightIndex = 0 then 0
-    elif i = 0 then score + 1
-    else
-        if line.Item i >= height then score + 1
-        else getScoreFromLeft heightIndex (i - 1) (score + 1) line 
+    match heightIndex with
+    | 0 -> 0
+    | _ when i = 0 ->  score + 1
+    | _ when line.Item i >= height -> score + 1
+    | _ -> getScoreFromLeft heightIndex (i - 1) (score + 1) line 
 
 let getScoreInLine (line: int list) =
     let scoreFn index line = getScoreFromLeft index (Math.Max(index - 1, 0)) 0 line
