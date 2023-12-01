@@ -6,3 +6,7 @@ __pycache__
 /**/input/*
 /**/.vs/*
 /**/bin/*
+
+/2023/AdventOfCode2023/.vs/AdventOfCode2023
+/2023/AdventOfCode2023/*/bin/Debug/net5.0
+/2023/AdventOfCode2023/*/obj
