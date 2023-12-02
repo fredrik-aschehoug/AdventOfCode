@@ -1,9 +1,6 @@
 ﻿module Day02
 
-open System.Text.RegularExpressions
 open System
-
-// 12 red cubes, 13 green cubes, and 14 blue cubes
 
 type Color =
     | Red = 0
@@ -16,9 +13,9 @@ type Bag =
       Blue: int; }
 
 type Item = { Color: Color; Quantity: int; }
-type Game = { Id: int; Items: Item[] }
+type Game = { Id: int; Bags: Bag[] }
 
-let bag = { Red = 12; Green = 13; Blue = 14; }
+let elfBag = { Red = 12; Green = 13; Blue = 14; }
 
 let splitLine (text: string) = text.Split("\r\n")
 
@@ -36,28 +33,41 @@ let parseItem (text: string) =
     let parts = text.Split(" ")
     { Quantity = Int32.Parse parts.[0]; Color = parseColor parts.[1] }
 
-let parseItems (text: string) =
-    text.Replace(";", ",").Split(", ") |> Array.map parseItem
+let foldBag (acc: Bag) (item: Item) =
+    match item.Color with
+    | Color.Red -> { acc with Red = item.Quantity }
+    | Color.Green -> { acc with Green = item.Quantity }
+    | Color.Blue -> { acc with Blue = item.Quantity }
+    | _ -> failwith("Unknown color")
+
+let parseBag (text: string) =
+    let bag = { Red = 0; Green = 0; Blue = 0; }
+    let items = text.Split(", ") |> Array.map parseItem
+    Array.fold foldBag bag items
+
+let parseBags (text: string) =
+    text.Split("; ") |> Array.map parseBag
 
 let parseGame (line: string) =
     let parts = line.Split(": ")
     let id = parseId parts.[0]
-    let items = parseItems parts.[1]
-    { Id = id; Items = items; }
+    let bags = parseBags parts.[1]
+    { Id = id; Bags = bags; }
 
 let getMaxValue (item: Item) =
     match item.Color with
-    | Color.Red -> bag.Red
-    | Color.Green -> bag.Green
-    | Color.Blue -> bag.Blue
+    | Color.Red -> elfBag.Red
+    | Color.Green -> elfBag.Green
+    | Color.Blue -> elfBag.Blue
     | _ -> failwith("Unknown color")
 
-let itemIsValid (item: Item) = 
-    let max = getMaxValue item
-    item.Quantity <= max
+let bagIsValid (bag: Bag) = 
+    bag.Red <= elfBag.Red &&
+    bag.Green <= elfBag.Green &&
+    bag.Blue <= elfBag.Blue
 
 let gameIsValid (game: Game) =
-    Array.forall itemIsValid game.Items
+    Array.forall bagIsValid game.Bags
 
 let part1 text =
     splitLine text
