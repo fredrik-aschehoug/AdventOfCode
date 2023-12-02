@@ -33,7 +33,7 @@ let parseItem (text: string) =
     let parts = text.Split(" ")
     { Quantity = Int32.Parse parts.[0]; Color = parseColor parts.[1] }
 
-let foldBag (acc: Bag) (item: Item) =
+let bagFolder (acc: Bag) (item: Item) =
     match item.Color with
     | Color.Red -> { acc with Red = item.Quantity }
     | Color.Green -> { acc with Green = item.Quantity }
@@ -43,23 +43,14 @@ let foldBag (acc: Bag) (item: Item) =
 let parseBag (text: string) =
     let bag = { Red = 0; Green = 0; Blue = 0; }
     let items = text.Split(", ") |> Array.map parseItem
-    Array.fold foldBag bag items
+    Array.fold bagFolder bag items
 
 let parseBags (text: string) =
     text.Split("; ") |> Array.map parseBag
 
 let parseGame (line: string) =
     let parts = line.Split(": ")
-    let id = parseId parts.[0]
-    let bags = parseBags parts.[1]
-    { Id = id; Bags = bags; }
-
-let getMaxValue (item: Item) =
-    match item.Color with
-    | Color.Red -> elfBag.Red
-    | Color.Green -> elfBag.Green
-    | Color.Blue -> elfBag.Blue
-    | _ -> failwith("Unknown color")
+    { Id = parseId parts.[0]; Bags = parseBags parts.[1]; }
 
 let bagIsValid (bag: Bag) = 
     bag.Red <= elfBag.Red &&
@@ -69,11 +60,24 @@ let bagIsValid (bag: Bag) =
 let gameIsValid (game: Game) =
     Array.forall bagIsValid game.Bags
 
-let part1 text =
-    splitLine text
-    |> Array.map parseGame
-    |> Array.filter gameIsValid
-    |> Array.sumBy(fun game -> game.Id)
+let getMinimumBag (game: Game) =
+    let redBag = Array.maxBy(fun x -> x.Red) game.Bags
+    let greenBag = Array.maxBy(fun x -> x.Green) game.Bags
+    let blueBag = Array.maxBy(fun x -> x.Blue) game.Bags
+    { Red = redBag.Red; Green = greenBag.Green; Blue = blueBag.Blue;}
+
+let getBagPower (bag: Bag) =
+    bag.Red * bag.Green * bag.Blue
+
+let part1 =
+    splitLine
+    >> Array.map parseGame
+    >> Array.filter gameIsValid
+    >> Array.sumBy(fun game -> game.Id)
 
 let part2 =
-    1
+    splitLine
+    >> Array.map parseGame
+    >> Array.map getMinimumBag
+    >> Array.map getBagPower
+    >> Array.sum
