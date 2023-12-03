@@ -2,17 +2,13 @@
 
 open System.Text.RegularExpressions
 open System
+open Common.Casting
+open Common.Parsing
 
 let pattern = @"one|two|three|four|five|six|seven|eight|nine|\d"
 let digitRx = Regex(@"\d", RegexOptions.Compiled)
 let spelledDigitRx = Regex(pattern, RegexOptions.Compiled)
 let spelledDigitRxRtl = Regex(pattern, RegexOptions.RightToLeft)
-
-let toString x = x.ToString()
-
-let toCharArray (x: string) = x.ToCharArray()
-
-let splitLine (text: string) = text.Split("\r\n")
 
 let mapSpelled text =
     match text with
@@ -40,12 +36,12 @@ let getNumberAdvanced (line: string) =
     Int32.Parse $"{first}{last}"
 
 let part1 =
-    splitLine
+    splitNewline
     >> Array.map toCharArray
     >> Array.map getNumber
     >> Array.sum
 
 let part2 =
-    splitLine
+    splitNewline
     >> Array.map getNumberAdvanced
     >> Array.sum

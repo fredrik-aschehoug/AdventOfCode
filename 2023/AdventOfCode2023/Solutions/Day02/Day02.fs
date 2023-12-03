@@ -1,6 +1,7 @@
 ﻿module Day02
 
 open System
+open Common.Parsing
 
 type Color =
     | Red = 0
@@ -16,8 +17,6 @@ type Item = { Color: Color; Quantity: int; }
 type Game = { Id: int; Bags: Bag[] }
 
 let elfBag = { Red = 12; Green = 13; Blue = 14; }
-
-let splitLine (text: string) = text.Split("\r\n")
 
 let parseId (text: string) =
     Int32.Parse (text.Replace("Game ", ""))
@@ -70,13 +69,13 @@ let getBagPower (bag: Bag) =
     bag.Red * bag.Green * bag.Blue
 
 let part1 =
-    splitLine
+    splitNewline
     >> Array.map parseGame
     >> Array.filter gameIsValid
     >> Array.sumBy(fun game -> game.Id)
 
 let part2 =
-    splitLine
+    splitNewline
     >> Array.map parseGame
     >> Array.map getMinimumBag
     >> Array.map getBagPower
