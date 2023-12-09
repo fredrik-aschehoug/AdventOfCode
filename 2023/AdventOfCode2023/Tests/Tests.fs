@@ -38,8 +38,8 @@ let ``Day03`` (fileName, expectedPart1, expectedPart2) =
     Assert.Equal(expectedPart2, (Day03.part2 text))
 
 [<Theory>]
-[<InlineData("Day04/Input/test.txt", 13, 0)>]
-[<InlineData("Day04/Input/prod.txt", 26914, 0)>]
+[<InlineData("Day04/Input/test.txt", 13, 30)>]
+[<InlineData("Day04/Input/prod.txt", 26914, 13080971)>]
 let ``Day04`` (fileName, expectedPart1, expectedPart2) =
     let text = File.ReadAllText(fileName)
 
