@@ -54,3 +54,12 @@ let ``Day05`` (fileName, expectedPart1, expectedPart2) =
 
     Assert.Equal(expectedPart1, (Day05.Part1.main text))
     Assert.Equal(expectedPart2, (Day05.Part2.main text))
+
+[<Theory>]
+[<InlineData("Day06/Input/test.txt", 288, 71503)>]
+[<InlineData("Day06/Input/prod.txt", 625968, 0)>]
+let ``Day06`` (fileName, expectedPart1, expectedPart2) =
+    let text = File.ReadAllText(fileName)
+
+    Assert.Equal(expectedPart1, (Day06.part1 text))
+    Assert.Equal(expectedPart2, (Day06.part2 text))
