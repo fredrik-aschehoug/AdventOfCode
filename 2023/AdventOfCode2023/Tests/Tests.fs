@@ -57,7 +57,7 @@ let ``Day05`` (fileName, expectedPart1, expectedPart2) =
 
 [<Theory>]
 [<InlineData("Day06/Input/test.txt", 288, 71503)>]
-[<InlineData("Day06/Input/prod.txt", 625968, 0)>]
+[<InlineData("Day06/Input/prod.txt", 625968, 43663323)>]
 let ``Day06`` (fileName, expectedPart1, expectedPart2) =
     let text = File.ReadAllText(fileName)
 
