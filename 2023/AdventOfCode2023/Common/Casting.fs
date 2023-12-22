@@ -17,3 +17,5 @@ module Casting =
         | false, _ -> None
 
     let toCharArray (x: string) = x.ToCharArray()
+
+    let toCharList = toCharArray >> Array.toList
