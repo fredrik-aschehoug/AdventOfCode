@@ -1,28 +1,10 @@
-﻿module Day07
+﻿module Day07.Part1
 
 open System
 open Common.Parsing
-open System.Text.RegularExpressions
 open Common.Casting
+open Day07.Common
 
-let fiveOfAKindRx = Regex(@"(.)\1{4}", RegexOptions.Compiled)
-let fourOfAKindRx = Regex(@"(.)\1{3}", RegexOptions.Compiled)
-
-let threeOfAKindRx = Regex(@"(.)\1{2}", RegexOptions.Compiled)
-let pairRx = Regex(@"(.)\1", RegexOptions.Compiled)
-
-type HandType =
-    | HighCard = 0
-    | Pair = 1
-    | TwoPair = 2
-    | ThreeOfAKind = 3
-    | FullHouse = 4
-    | FourOfAKind = 5
-    | FiveOfAKind = 6
-
-type Hand = { Type: HandType; Labels: int list; Bid: int; Rank: int; Original: string; }
-
-let defaultHand = { Type = HandType.HighCard; Labels = []; Bid = 0; Rank = 0; Original = "" }
 
 let parseLabel label =
     match label with
@@ -71,7 +53,7 @@ let calculateHand labels =
     let result = enum<HandType> index
     result
     
-let parseLine text =
+let parseHand text =
     let parts = splitText " " text
     let labelChars = parts |> Array.head |> toCharList
     let bid = Int32.Parse (Array.last parts)
@@ -80,31 +62,11 @@ let parseLine text =
 
     { defaultHand with Bid = bid; Type = handType; Original = (Array.head parts); Labels = labels}
 
-let isGreater (zipped: (int*int)) =
-    match zipped with 
-    | (x,y) when x > y -> true
-    | _ -> false
-
-let rec handIsGreater (zipped: (int*int) list) = 
-    match zipped with
-    | [] -> 0
-    | (x,y)::xs when x = y -> handIsGreater xs
-    | x::xs ->  if isGreater x then -1 else 1
-    
-let handComparer (h1: Hand) (h2: Hand) =
-    List.zip h1.Labels h2.Labels |> handIsGreater
-    
-let setRank ((rank, hand): (int*Hand)) =
-    { hand with Rank = rank }
-
-let getScore hand =
-    hand.Rank * hand.Bid
-
-let part1 text =
+let main text =
     let hands =
         text |> splitNewline
         |> Array.toList
-        |> List.map parseLine
+        |> List.map parseHand
     let ranks = [1 .. hands.Length] |> List.rev
     let sorted = hands |> List.sortWith handComparer |> List.sortByDescending (fun x -> x.Type)
     
@@ -112,6 +74,3 @@ let part1 text =
     |> List.map setRank
     |> List.map getScore
     |> List.sum
-   
-let part2 text =
-    0
