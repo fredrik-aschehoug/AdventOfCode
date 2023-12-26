@@ -77,11 +77,18 @@ type Tests() =
         Assert.Equal(expectedPart2, (Day07.Part2.main text))
 
     [<Theory>]
-    [<InlineData("Day08/Input/test.txt", 2, 0)>]
-    [<InlineData("Day08/Input/test2.txt", 6, 0)>]
-    [<InlineData("Day08/Input/prod.txt", 19667, 0)>]
-    let ``Day08`` (fileName, expectedPart1, expectedPart2) =
+    [<InlineData("Day08/Input/test.txt", 2)>]
+    [<InlineData("Day08/Input/test2.txt", 6)>]
+    [<InlineData("Day08/Input/prod.txt", 19667)>]
+    let ``Day08 - Part 1`` (fileName, expected) =
         let text = File.ReadAllText(fileName)
 
-        Assert.Equal(expectedPart1, (Day08.part1 text))
-        Assert.Equal(expectedPart2, (Day08.part2 text))
+        Assert.Equal(expected, (Day08.part1 text))
+
+    [<Theory>]
+    [<InlineData("Day08/Input/test3.txt", 6)>]
+    [<InlineData("Day08/Input/prod.txt", 19185263738117L)>]
+    let ``Day08 - Part 2`` (fileName, expected) =
+        let text = File.ReadAllText(fileName)
+
+        Assert.Equal(expected, (Day08.part2 text))
