@@ -10,3 +10,8 @@ __pycache__
 /2023/AdventOfCode2023/.vs/AdventOfCode2023
 /2023/AdventOfCode2023/*/bin/Debug/net5.0
 /2023/AdventOfCode2023/*/obj
+
+/2024/AdventOfCode2024/.vs/AdventOfCode2024
+/2024/AdventOfCode2024/*/bin/Debug
+/AdventOfCode2024/*/obj
+/**/Input/*
