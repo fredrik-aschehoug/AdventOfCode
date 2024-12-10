@@ -36,3 +36,19 @@ type Tests() =
         let text = File.ReadAllText(fileName)
 
         Assert.Equal(expected, (Day02.part2 text))
+
+    [<Theory>]
+    [<InlineData("Day03/Input/test.txt", 161)>]
+    [<InlineData("Day03/Input/prod.txt", 184576302)>]
+    let ``Day03 - Part1`` (fileName, expected) =
+        let text = File.ReadAllText(fileName)
+
+        Assert.Equal(expected, (Day03.part1 text))
+
+    [<Theory>]
+    [<InlineData("Day03/Input/test2.txt", 48)>]
+    [<InlineData("Day03/Input/prod.txt", 118173507)>]
+    let ``Day03 - Part2`` (fileName, expected) =
+        let text = File.ReadAllText(fileName)
+
+        Assert.Equal(expected, (Day03.part2 text))
